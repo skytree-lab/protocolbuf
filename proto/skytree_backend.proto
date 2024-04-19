@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+
+option go_package="./;skytree_backend";
+package skytree_backend.api;
+
+message DepositPointRequest {
+    int64 cross_chain_tx_id = 1;
+}
+
+message DepositPointResponse {
+	int64 status = 1;
+}
+
+message ExchangePointRequest {
+    string token_amount = 1;
+    string user = 2;
+    string claim_tx = 3;
+    int64  claim_time = 4;
+}
+
+message ExchangePointResponse {
+    string code = 1;
+    string msg = 2;
+}
+
+message OnTokenExchangedRequest {
+    string token_amount = 1;
+    string user = 2;
+    string claim_tx = 3;
+    int64  claim_time = 4;
+    repeated int32 user_data = 5;
+}
+
+message OnTokenExchangedResponse {
+    string code = 1;
+    string msg = 2;
+}
+
+service SkyteeBackend {
+	rpc DepositPoint (DepositPointRequest) returns (DepositPointResponse) {
+    }
+    rpc ExchangePoint (ExchangePointRequest) returns (ExchangePointResponse) {
+    }
+    rpc OnTokenExchanged (OnTokenExchangedRequest) returns (OnTokenExchangedResponse) {
+    }
+}
